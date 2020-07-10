@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class TimeManager : MonoBehaviour
     public static float time;
     public float maxTime;
     public string currentTimeString;
+
+    public TMP_Text timerTextDisplay;
     void Awake() {
         time = 0f;
 
@@ -16,7 +19,7 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -24,7 +27,9 @@ public class TimeManager : MonoBehaviour
     {
 
         time += Time.deltaTime;
+
         currentTimeString = ReturnTimeReadable();
+        timerTextDisplay.text = currentTimeString;
         
     }
 
