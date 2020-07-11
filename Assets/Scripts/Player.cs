@@ -19,8 +19,62 @@ public class Player : MonoBehaviour
     }
 
 
-
     void setCompassDir()
+    {
+        float hori = Input.GetAxis("Horizontal");
+        float verti = Input.GetAxis("Vertical");
+        if(hori > 0)
+        {
+            if(verti > 0)
+            {
+                Debug.Log("NE");
+                facingDir = dirCompass.NE;
+            }
+            else if (verti < 0)
+            {
+                Debug.Log("SE");
+                facingDir = dirCompass.SE;
+            }
+            else
+            {
+                Debug.Log("E");
+                facingDir = dirCompass.E;
+            }
+        }
+        else if(hori < 0)
+        {
+            if (verti > 0)
+            {
+                Debug.Log("NW");
+                facingDir = dirCompass.NW;
+            }
+            else if (verti < 0)
+            {
+                Debug.Log("SW");
+                facingDir = dirCompass.SW;
+            }
+            else
+            {
+                Debug.Log("W");
+                facingDir = dirCompass.W;
+            }
+        }else
+        {
+            if (verti > 0)
+            {
+                Debug.Log("N");
+                facingDir = dirCompass.N;
+            }
+            else if (verti < 0)
+            {
+                Debug.Log("S");
+                facingDir = dirCompass.S;
+            }
+        }
+
+    }
+
+    void setCompassDir_OLD()
     {
         //Set Direction
         if (Input.GetKey(KeyCode.W))
