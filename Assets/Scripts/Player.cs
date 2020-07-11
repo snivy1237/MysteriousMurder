@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody2D rigidBody;
     public int speed;
-    public bool whiteKey;
+    public bool whiteKey = false;
     public enum dirCompass {N,E,S,W,NE,SE,NW,SW};
     public dirCompass facingDir = dirCompass.S;
     public Animator anim;
