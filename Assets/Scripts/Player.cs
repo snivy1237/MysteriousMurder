@@ -10,9 +10,11 @@ public class Player : MonoBehaviour
     public bool whiteKey;
     public enum dirCompass {N,E,S,W,NE,SE,NW,SW};
     public dirCompass facingDir = dirCompass.S;
+    public Animator anim;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();   
     }
 
