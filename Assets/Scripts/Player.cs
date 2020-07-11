@@ -124,15 +124,27 @@ public class Player : MonoBehaviour
         {
             case dirCompass.N:
                 anim.SetBool("Is_Walking_North",true);
+                anim.SetBool("Is_Walking_South", false);
+                anim.SetBool("Is_Walking_West", false);
+                anim.SetBool("Is_Walking_East", false);
                 return;
             case dirCompass.E:
                 anim.SetBool("Is_Walking_East",true);
+                anim.SetBool("Is_Walking_South", false);
+                anim.SetBool("Is_Walking_West", false);
+                anim.SetBool("Is_Walking_North", false);
                 return;
             case dirCompass.S:
                 anim.SetBool("Is_Walking_South",true);
+                anim.SetBool("Is_Walking_West", false);
+                anim.SetBool("Is_Walking_North", false);
+                anim.SetBool("Is_Walking_East", false);
                 return;
             case dirCompass.W:
                 anim.SetBool("Is_Walking_West",true);
+                anim.SetBool("Is_Walking_South", false);
+                anim.SetBool("Is_Walking_North", false);
+                anim.SetBool("Is_Walking_East", false);
                 return;
             default:
                 anim.SetBool("Is_Walking_South",false);
