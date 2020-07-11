@@ -145,5 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyRequired: 0
   stateChanges: 
-  isOpenTime: 0
+  isOpenTime: 1
   doorOpen: 0
