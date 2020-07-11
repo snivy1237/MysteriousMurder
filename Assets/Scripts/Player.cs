@@ -10,10 +10,12 @@ public class Player : MonoBehaviour
     public bool whiteKey = false;
     public enum dirCompass {N,E,S,W,NE,SE,NW,SW};
     public dirCompass facingDir = dirCompass.S;
+    public Animator anim;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();   
+        anim = GetComponent<Animator>();
     }
 
 
@@ -38,9 +40,11 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
+            anim.SetBool("Is_Walking_South", true);
             if (Input.GetKey(KeyCode.A))
             {
                 facingDir = dirCompass.SW;
+                
             }
             else if (Input.GetKey(KeyCode.D))
             {
@@ -57,6 +61,10 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             facingDir = dirCompass.E;
+            anim.SetBool("Walking_east", true);
+        } else {
+            anim.SetBool("Walking_east",false);
+            anim.SetBool("Is_Walking_South", false);
         }
     }
 
@@ -67,12 +75,16 @@ public class Player : MonoBehaviour
             case dirCompass.N:
                 return transform.up;
             case dirCompass.E:
+                anim.SetBool("Walking_east", true);
                 return transform.right;
             case dirCompass.S:
+                anim.SetBool("Is_Walking_South", true);
                 return -transform.up;
             case dirCompass.W:
                 return -transform.right;
             default:
+                anim.SetBool("Walking_east",false);
+                anim.SetBool("Is_Walking_South", false);
                 return transform.up;
         }
     }
@@ -80,7 +92,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        setCompassDir();
         Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         rigidBody.MovePosition(rigidBody.position + (inputVector * speed * Time.fixedDeltaTime));
