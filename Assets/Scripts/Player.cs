@@ -17,8 +17,62 @@ public class Player : MonoBehaviour
     }
 
 
-
     void setCompassDir()
+    {
+        float hori = Input.GetAxis("Horizontal");
+        float verti = Input.GetAxis("Vertical");
+        if(hori > 0)
+        {
+            if(verti > 0)
+            {
+                Debug.Log("NE");
+                facingDir = dirCompass.NE;
+            }
+            else if (verti < 0)
+            {
+                Debug.Log("SE");
+                facingDir = dirCompass.SE;
+            }
+            else
+            {
+                Debug.Log("E");
+                facingDir = dirCompass.E;
+            }
+        }
+        else if(hori < 0)
+        {
+            if (verti > 0)
+            {
+                Debug.Log("NW");
+                facingDir = dirCompass.NW;
+            }
+            else if (verti < 0)
+            {
+                Debug.Log("SW");
+                facingDir = dirCompass.SW;
+            }
+            else
+            {
+                Debug.Log("W");
+                facingDir = dirCompass.W;
+            }
+        }else
+        {
+            if (verti > 0)
+            {
+                Debug.Log("N");
+                facingDir = dirCompass.N;
+            }
+            else if (verti < 0)
+            {
+                Debug.Log("S");
+                facingDir = dirCompass.S;
+            }
+        }
+
+    }
+
+    void setCompassDir_OLD()
     {
         //Set Direction
         if (Input.GetKey(KeyCode.W))
@@ -38,6 +92,7 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
+            
             if (Input.GetKey(KeyCode.A))
             {
                 facingDir = dirCompass.SW;
@@ -57,6 +112,31 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             facingDir = dirCompass.E;
+        }
+    }
+
+    void getFacingDirectionAnimation() 
+    {
+        switch (facingDir)
+        {
+            case dirCompass.N:
+                anim.SetBool("Is_Walking_North",true);
+                return;
+            case dirCompass.E:
+                anim.SetBool("Is_Walking_East",true);
+                return;
+            case dirCompass.S:
+                anim.SetBool("Is_Walking_South",true);
+                return;
+            case dirCompass.W:
+                anim.SetBool("Is_Walking_West",true);
+                return;
+            default:
+                anim.SetBool("Is_Walking_South",false);
+                anim.SetBool("Is_Walking_West",false);
+                anim.SetBool("Is_Walking_North",false);
+                anim.SetBool("Is_Walking_East",false);
+                return;
         }
     }
 
@@ -80,7 +160,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        getFacingDirectionAnimation();
         Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         rigidBody.MovePosition(rigidBody.position + (inputVector * speed * Time.fixedDeltaTime));
@@ -90,6 +170,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         setCompassDir();
+        getFacingDirectionAnimation();
         //Interaction Call
         if (Input.GetKeyDown(KeyCode.E))
         {
