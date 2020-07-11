@@ -10,12 +10,10 @@ public class Player : MonoBehaviour
     public bool whiteKey;
     public enum dirCompass {N,E,S,W,NE,SE,NW,SW};
     public dirCompass facingDir = dirCompass.S;
-    public Animator anim;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();   
-        anim = GetComponent<Animator>();
     }
 
 
@@ -98,7 +96,6 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 facingDir = dirCompass.SW;
-                
             }
             else if (Input.GetKey(KeyCode.D))
             {
