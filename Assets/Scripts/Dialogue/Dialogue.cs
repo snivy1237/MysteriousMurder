@@ -31,12 +31,12 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    static void LoadDialogue(List<string> newDialogues) {
+    public static void LoadDialogue(List<string> newDialogues) {
         singleton.dialogues = newDialogues;
         singleton.canvas.gameObject.SetActive(true);
     }
 
-    static Dialogue getDialogueBox() {
+    public static Dialogue getDialogueBox() {
         return singleton;
     }
 

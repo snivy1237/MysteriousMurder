@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody2D rigidBody;
     public int speed;
-    public bool whiteKey;
+    public bool whiteKey = false;
     public enum dirCompass {N,E,S,W,NE,SE,NW,SW};
     public dirCompass facingDir = dirCompass.S;
     public Animator anim;
@@ -27,17 +27,17 @@ public class Player : MonoBehaviour
         {
             if(verti > 0)
             {
-                Debug.Log("NE");
+                //Debug.Log("NE");
                 facingDir = dirCompass.NE;
             }
             else if (verti < 0)
             {
-                Debug.Log("SE");
+                //Debug.Log("SE");
                 facingDir = dirCompass.SE;
             }
             else
             {
-                Debug.Log("E");
+                //Debug.Log("E");
                 facingDir = dirCompass.E;
             }
         }
@@ -45,29 +45,29 @@ public class Player : MonoBehaviour
         {
             if (verti > 0)
             {
-                Debug.Log("NW");
+                //Debug.Log("NW");
                 facingDir = dirCompass.NW;
             }
             else if (verti < 0)
             {
-                Debug.Log("SW");
+                //Debug.Log("SW");
                 facingDir = dirCompass.SW;
             }
             else
             {
-                Debug.Log("W");
+                //Debug.Log("W");
                 facingDir = dirCompass.W;
             }
         }else
         {
             if (verti > 0)
             {
-                Debug.Log("N");
+                //Debug.Log("N");
                 facingDir = dirCompass.N;
             }
             else if (verti < 0)
             {
-                Debug.Log("S");
+                //Debug.Log("S");
                 facingDir = dirCompass.S;
             }
         }
@@ -196,10 +196,12 @@ public class Player : MonoBehaviour
             {
                 Debug.Log(obj.collider.name);
                 //Call Interact Method on Each interacted object
-                Component Inter = obj.collider.gameObject.GetComponent<Interactable>();
-                if (Inter)
+                Interactable inter = obj.collider.gameObject.GetComponent<Interactable>();
+                if (inter)
                 {
                     Debug.Log("Interactable");
+                    inter.OnInteract(this.gameObject);
+                    
                 }
             }
         }

@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4996788975441071617}
   - component: {fileID: 4996788975441071622}
-  - component: {fileID: 8514231477768003249}
+  - component: {fileID: 6529004844088519115}
+  - component: {fileID: 7530104995341094157}
+  - component: {fileID: 5176124510335485277}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -82,7 +84,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8514231477768003249
+--- !u!61 &6529004844088519115
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996788975441071623}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.012901723, y: -0.44897944}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 1.28}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.3148769, y: 0.3820411}
+  m_EdgeRadius: 0
+--- !u!70 &7530104995341094157
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996788975441071623}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.96, y: 1.48}
+  m_Direction: 0
+--- !u!114 &5176124510335485277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,7 +135,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4996788975441071623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7915171fc13472a40a0162003052d2db, type: 3}
+  m_Script: {fileID: 11500000, guid: 8200d21137e5f104f96ca5a03ea85d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graph: {fileID: 0}
