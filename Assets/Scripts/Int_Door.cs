@@ -14,6 +14,8 @@ public class Int_Door : Interactable
 
     public bool doorOpen = false;
 
+    public Switch[] activateSwitches; 
+
     void Start()
     {
         
@@ -58,12 +60,21 @@ public class Int_Door : Interactable
             //Is it the right time for the door
             if (isOpenTime == true)
             {
-                openDoor();
+
             }
             else
             {
                 Debug.Log("Maybe come back another time");
                 return;
+            }
+            foreach (Switch o_switch in activateSwitches)
+            {
+                if (o_switch.isOn == false)
+                {
+                    Debug.Log("Maybe somthing will activate this");
+                    return;
+                }
+                openDoor();
             }
         }
         else
