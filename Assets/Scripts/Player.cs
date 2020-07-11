@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody2D rigidBody;
     public int speed;
-    public bool whiteKey;
+    public bool whiteKey = false;
     public enum dirCompass {N,E,S,W,NE,SE,NW,SW};
     public dirCompass facingDir = dirCompass.S;
     public Animator anim;
@@ -196,10 +196,11 @@ public class Player : MonoBehaviour
             {
                 Debug.Log(obj.collider.name);
                 //Call Interact Method on Each interacted object
-                Component Inter = obj.collider.gameObject.GetComponent<Interactable>();
+                Interactable Inter = obj.collider.gameObject.GetComponent<Interactable>();
                 if (Inter)
                 {
                     Debug.Log("Interactable");
+                    Inter.OnInteract(this.gameObject);
                 }
             }
         }
