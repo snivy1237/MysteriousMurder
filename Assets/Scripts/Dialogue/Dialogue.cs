@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 public class Dialogue : MonoBehaviour
 {
-
     static Dialogue singleton;
 
     public TMP_Text curDialogueText;
