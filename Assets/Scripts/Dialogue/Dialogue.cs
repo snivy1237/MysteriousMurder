@@ -16,8 +16,7 @@ public class Dialogue : MonoBehaviour
     void Start()
     {
         singleton = this;
-        curDialogueText.text = dialogues[0];
-        dialogues.RemoveAt(0);
+        NextDialogue();
     }
 
     // Update is called once per frame
@@ -25,8 +24,7 @@ public class Dialogue : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1")) {
             if(dialogues.Count > 0) {
-                curDialogueText.text = dialogues[0];
-                dialogues.RemoveAt(0);
+                NextDialogue();
              } else { 
                 canvas.gameObject.SetActive(false);
             }
@@ -40,5 +38,11 @@ public class Dialogue : MonoBehaviour
 
     static Dialogue getDialogueBox() {
         return singleton;
+    }
+
+    void NextDialogue() {
+        singleton.canvas.gameObject.SetActive(true);
+        curDialogueText.text = dialogues[0];
+        dialogues.RemoveAt(0);
     }
 }
