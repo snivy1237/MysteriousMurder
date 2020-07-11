@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody2D rigidBody;
     public int speed;
-    public bool whiteKey = false;
+    public bool whiteKey;
     public enum dirCompass {N,E,S,W,NE,SE,NW,SW};
     public dirCompass facingDir = dirCompass.S;
     public Animator anim;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            anim.SetBool("Is_Walking_South", true);
+            
             if (Input.GetKey(KeyCode.A))
             {
                 facingDir = dirCompass.SW;
@@ -61,10 +61,31 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             facingDir = dirCompass.E;
-            anim.SetBool("Walking_east", true);
-        } else {
-            anim.SetBool("Walking_east",false);
-            anim.SetBool("Is_Walking_South", false);
+        }
+    }
+
+    void getFacingDirectionAnimation() 
+    {
+        switch (facingDir)
+        {
+            case dirCompass.N:
+                anim.SetBool("Is_Walking_North",true);
+                return;
+            case dirCompass.E:
+                anim.SetBool("Is_Walking_East",true);
+                return;
+            case dirCompass.S:
+                anim.SetBool("Is_Walking_South",true);
+                return;
+            case dirCompass.W:
+                anim.SetBool("Is_Walking_West",true);
+                return;
+            default:
+                anim.SetBool("Is_Walking_South",false);
+                anim.SetBool("Is_Walking_West",false);
+                anim.SetBool("Is_Walking_North",false);
+                anim.SetBool("Is_Walking_East",false);
+                return;
         }
     }
 
@@ -75,16 +96,12 @@ public class Player : MonoBehaviour
             case dirCompass.N:
                 return transform.up;
             case dirCompass.E:
-                anim.SetBool("Walking_east", true);
                 return transform.right;
             case dirCompass.S:
-                anim.SetBool("Is_Walking_South", true);
                 return -transform.up;
             case dirCompass.W:
                 return -transform.right;
             default:
-                anim.SetBool("Walking_east",false);
-                anim.SetBool("Is_Walking_South", false);
                 return transform.up;
         }
     }
@@ -92,7 +109,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        setCompassDir();
+        getFacingDirectionAnimation();
         Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         rigidBody.MovePosition(rigidBody.position + (inputVector * speed * Time.fixedDeltaTime));
@@ -102,6 +119,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         setCompassDir();
+        getFacingDirectionAnimation();
         //Interaction Call
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -113,11 +131,10 @@ public class Player : MonoBehaviour
             {
                 Debug.Log(obj.collider.name);
                 //Call Interact Method on Each interacted object
-                Interactable Inter = obj.collider.gameObject.GetComponent<Interactable>();
+                Component Inter = obj.collider.gameObject.GetComponent<Interactable>();
                 if (Inter)
                 {
                     Debug.Log("Interactable");
-                    Inter.OnInteract(this.gameObject);
                 }
             }
         }
