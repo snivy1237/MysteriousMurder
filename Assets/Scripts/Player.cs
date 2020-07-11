@@ -14,12 +14,10 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
-        rigidBody.velocity = new Vector2(
-            Input.GetAxis("Horizontal") * speed,
-            Input.GetAxis("Vertical") * speed
-        );
+        Vector2 inputVector = new Vector2( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        inputVector = Vector2.ClampMagnitude(inputVector, 1);
+        rigidBody.MovePosition(rigidBody.position + (inputVector * speed * Time.fixedDeltaTime));    
     }
 }
